@@ -1,6 +1,6 @@
 "use client";
 
-import ProxyForm from "@/components/ProxyForm";
+import ProxyForm from "../../../../components/ProxyForm";
 
 export default function NewConfig() {
   return (

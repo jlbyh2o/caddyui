@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "../../../../lib/authOptions";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   try {
     // Get the user session
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.id) {
       return NextResponse.json(
         { error: "You must be logged in to change your password" },
@@ -40,18 +40,18 @@ export async function POST(req: NextRequest) {
     // Get the user from the database
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { id: true, password: true }
+      select: { id: true, password: true },
     });
 
     if (!user) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     // Verify the current password
-    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
     if (!isPasswordValid) {
       return NextResponse.json(
         { error: "Current password is incorrect" },
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     // Update the user's password
     await prisma.user.update({
       where: { id: user.id },
-      data: { password: hashedPassword }
+      data: { password: hashedPassword },
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
@@ -76,4 +76,4 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

@@ -1,5 +1,5 @@
-import AuthContext from '@/contexts/AuthContext'
-import { ThemeProvider } from '@/contexts/ThemeContext'
+import AuthContext from '../contexts/AuthContext'
+import { ThemeProvider } from '../contexts/ThemeContext'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'

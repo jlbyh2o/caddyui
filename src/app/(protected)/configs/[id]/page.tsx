@@ -1,6 +1,6 @@
 "use client";
 
-import ProxyForm from "@/components/ProxyForm";
+import ProxyForm, { ProxyFormData } from "../../../../components/ProxyForm";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
@@ -8,7 +8,7 @@ import { FiArrowLeft } from "react-icons/fi";
 export default function EditConfig() {
   const params = useParams();
   const router = useRouter();
-  const [config, setConfig] = useState<any>(null);
+  const [config, setConfig] = useState<ProxyFormData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,7 +17,7 @@ export default function EditConfig() {
       try {
         setLoading(true);
         const response = await fetch(`/api/configs/${params.id}`);
-        
+
         if (!response.ok) {
           if (response.status === 404) {
             router.push("/configs");
@@ -25,7 +25,7 @@ export default function EditConfig() {
           }
           throw new Error("Failed to fetch configuration");
         }
-        
+
         const data = await response.json();
         setConfig(data);
       } catch (err) {
@@ -59,16 +59,18 @@ export default function EditConfig() {
   return (
     <div>
       <div className="mb-8">
-        <button 
+        <button
           onClick={() => router.back()}
           className="flex items-center text-indigo-600 hover:text-indigo-800 mb-4"
         >
           <FiArrowLeft className="mr-1" /> Back to list
         </button>
         <h1 className="text-3xl font-bold text-gray-800">Edit Reverse Proxy</h1>
-        <p className="text-gray-600 mt-2">Update your Caddy reverse proxy configuration</p>
+        <p className="text-gray-600 mt-2">
+          Update your Caddy reverse proxy configuration
+        </p>
       </div>
       {config && <ProxyForm initialData={config} isEditing={true} />}
     </div>
   );
-} 
+}

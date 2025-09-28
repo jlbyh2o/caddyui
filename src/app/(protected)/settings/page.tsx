@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { useSession } from "next-auth/react";
-import { FiServer, FiSliders, FiUser, FiSave, FiRefreshCw, FiTrash2 } from "react-icons/fi";
-import PasswordChangeForm from "@/components/PasswordChangeForm";
+import { FiServer, FiSliders, FiUser, FiSave, FiRefreshCw } from "react-icons/fi";
+import PasswordChangeForm from "../../../components/PasswordChangeForm";
 
 export default function Settings() {
   const { theme, toggleTheme } = useTheme();

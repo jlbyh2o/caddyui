@@ -1,6 +1,6 @@
 'use client';
 
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import { FiMoon, FiSun } from 'react-icons/fi';
 
 export default function ThemeToggle() {
