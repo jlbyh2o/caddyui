@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
     console.error("Error completing setup:", error);
     
     // Check for unique constraint violation (email already exists)
-    if ((error as any)?.code === "P2002") {
+    if ((error as ({code: string} | null))?.code === "P2002") {
       return NextResponse.json(
         { error: "Email already in use" },
         { status: 400 }

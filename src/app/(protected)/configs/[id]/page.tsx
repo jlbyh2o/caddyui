@@ -8,7 +8,7 @@ import { FiArrowLeft } from "react-icons/fi";
 export default function EditConfig() {
   const params = useParams();
   const router = useRouter();
-  const [config, setConfig] = useState<any>(null);
+  const [config, setConfig] = useState<object | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

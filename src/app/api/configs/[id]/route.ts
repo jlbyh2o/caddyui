@@ -1,12 +1,13 @@
 import { prisma } from "../../../../lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "../../auth/[...nextauth]/authOptions";
 
 // GET single config
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/configs/[id]'>
+//  { params }: { params: { id: string } }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -17,8 +18,7 @@ export async function GET(
       });
     }
     
-    // Extract id from params to fix the "params should be awaited before using its properties" error
-    const id = params.id;
+    const { id } = await ctx.params
     
     const config = await prisma.caddyConfig.findUnique({
       where: {
