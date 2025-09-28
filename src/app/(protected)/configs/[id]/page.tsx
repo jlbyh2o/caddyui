@@ -1,6 +1,6 @@
 "use client";
 
-import ProxyForm from "@/components/ProxyForm";
+import ProxyForm from "../../../../components/ProxyForm";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
