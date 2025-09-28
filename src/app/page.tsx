@@ -26,7 +26,7 @@ export default function Home() {
       try {
         const response = await fetch("/api/setup/status");
         const data = await response.json();
-        
+
         // If setup is required, redirect to setup page
         if (data.setupRequired) {
           router.push("/setup");
@@ -47,26 +47,26 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !password) {
       setError("Please enter both email and password");
       return;
     }
-    
+
     try {
       setIsLoading(true);
       setError("");
-      
+
       const result = await signIn("credentials", {
         redirect: false,
         email,
         password,
       });
-      
+
       if (result?.error) {
         setError(result.error);
       }
-    } catch (err) {
+    } catch (_err) {
       setError("An error occurred during sign in");
     } finally {
       setIsLoading(false);
@@ -100,7 +100,9 @@ export default function Home() {
                   d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
                 />
               </svg>
-              <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Caddy UI</span>
+              <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">
+                Caddy UI
+              </span>
             </div>
           </div>
         </div>
@@ -114,9 +116,11 @@ export default function Home() {
                 Manage Caddy with ease
               </h1>
               <p className="mt-6 text-xl text-gray-500 dark:text-gray-300">
-                A beautiful web interface for managing your Caddy web server. Configure reverse proxies, SSL certificates, and more with just a few clicks.
+                A beautiful web interface for managing your Caddy web server.
+                Configure reverse proxies, SSL certificates, and more with just
+                a few clicks.
               </p>
-              
+
               <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3">
                 <div className="pt-6">
                   <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8 shadow-md h-full">
@@ -126,14 +130,17 @@ export default function Home() {
                           <FiServer className="h-6 w-6 text-white" />
                         </span>
                       </div>
-                      <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">Easy Configuration</h3>
+                      <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">
+                        Easy Configuration
+                      </h3>
                       <p className="mt-5 text-base text-gray-500 dark:text-gray-400">
-                        Configure reverse proxies with a simple, intuitive interface. No more editing config files manually.
+                        Configure reverse proxies with a simple, intuitive
+                        interface. No more editing config files manually.
                       </p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="pt-6">
                   <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8 shadow-md h-full">
                     <div className="-mt-6">
@@ -142,14 +149,17 @@ export default function Home() {
                           <FiShield className="h-6 w-6 text-white" />
                         </span>
                       </div>
-                      <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">Secure Access</h3>
+                      <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">
+                        Secure Access
+                      </h3>
                       <p className="mt-5 text-base text-gray-500 dark:text-gray-400">
-                        User authentication ensures only authorized users can manage your Caddy server.
+                        User authentication ensures only authorized users can
+                        manage your Caddy server.
                       </p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="pt-6">
                   <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8 shadow-md h-full">
                     <div className="-mt-6">
@@ -158,16 +168,19 @@ export default function Home() {
                           <FiGlobe className="h-6 w-6 text-white" />
                         </span>
                       </div>
-                      <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">Modern Interface</h3>
+                      <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">
+                        Modern Interface
+                      </h3>
                       <p className="mt-5 text-base text-gray-500 dark:text-gray-400">
-                        Beautiful, responsive design that works on desktop and mobile devices.
+                        Beautiful, responsive design that works on desktop and
+                        mobile devices.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-12 lg:mt-0 lg:col-span-6">
               <div className="bg-white dark:bg-gray-800 sm:max-w-md sm:w-full sm:mx-auto sm:rounded-lg sm:overflow-hidden shadow-lg">
                 <div className="px-4 py-8 sm:px-10">
@@ -184,9 +197,12 @@ export default function Home() {
                           <span className="block sm:inline">{error}</span>
                         </div>
                       )}
-                      
+
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        >
                           Email address
                         </label>
                         <div className="mt-1">
@@ -204,7 +220,10 @@ export default function Home() {
                       </div>
 
                       <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label
+                          htmlFor="password"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        >
                           Password
                         </label>
                         <div className="mt-1">
@@ -235,7 +254,8 @@ export default function Home() {
                 </div>
                 <div className="px-4 py-6 bg-gray-50 dark:bg-gray-700 border-t-2 border-gray-200 dark:border-gray-600 sm:px-10">
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    By signing in, you agree to our Terms of Service and Privacy Policy.
+                    By signing in, you agree to our Terms of Service and Privacy
+                    Policy.
                   </p>
                 </div>
               </div>
